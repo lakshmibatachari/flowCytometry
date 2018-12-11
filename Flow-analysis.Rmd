@@ -1,0 +1,32 @@
+---
+title: "flow-analysis"
+author: "Lakshmi Batachari"
+date: "September 23, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(readxl)
+library(tidyverse)
+theme_set(theme_classic())
+```
+
+```{r}
+flow <- read_excel("Flow data/113018 Splenocytes.xls", sheet = 3)
+
+#flow$sampleName <- factor(flow$sampleName, levels = flow$sampleName[order(flow$baby)])
+
+#IL 10 fraction
+ggplot(flow)+
+  geom_bar(stat = "identity", aes(x = sampleName, y = IL10, fill = factor(baby)))+
+  xlab("Bacterial Product") +
+  ylab("IL10+ Fraction") +
+  #scale_x_continuous(breaks = seq(1, 50, 1))+
+  theme(axis.text.x = element_text(hjust = 1, size =6, angle = 90), axis.text.y = element_text(size = 6))+
+  scale_fill_discrete(name = "Baby")
+  #coord_flip()
+ 
+
+
+
+```
