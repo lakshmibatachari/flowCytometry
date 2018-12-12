@@ -12,7 +12,7 @@ theme_set(theme_classic())
 ```
 
 ```{r}
-flow <- read_excel("Flow data/121018 Splenocytes FlowJo.xls", sheet = 1)
+flow <- read_excel("Flow data/113018 Splenocytes FlowJo update.xls",sheet = 1)
 
 meanValues <- flow %>%
   group_by(sampleName, baby) %>%
@@ -49,7 +49,7 @@ ggplot(meanValues)+
 Hannah's data
 ```{r}
 
-HCC <- read_excel("Flow data/121018 splenocytes HCC FlowJo.xls", sheet = 1)
+HCC <- read_excel("Flow data/121018 Splenocytes HCC modified.xls", sheet = 1)
 
 HCCmeanValues <- HCC %>%
   group_by(sampleName) %>%
@@ -59,17 +59,30 @@ ggplot(HCCmeanValues) +
   geom_bar(stat = "identity", aes(x = sampleName, y = IL10))+
   xlab("Bacterial Product") +
   ylab("IL10+ Fraction") +
-  theme(axis.text.x = element_text(hjust = 1, size =6, angle = 90), axis.text.y = element_text(size = 6))
+  theme(axis.text.x = element_text(hjust = 1, size =10, angle = 90), axis.text.y = element_text(size = 6))
 
 ggplot(HCCmeanValues) +
   geom_bar(stat = "identity", aes(x = sampleName, y = CD4Foxp3))+
   xlab("Bacterial Product") +
   ylab("CD4+Foxp3+ Fraction") +
-  theme(axis.text.x = element_text(hjust = 1, size =6, angle = 90), axis.text.y = element_text(size = 6))
+  theme(axis.text.x = element_text(hjust = 1, size =10, angle = 90), axis.text.y = element_text(size = 6))
 
 ggplot(HCCmeanValues) +
   geom_bar(stat = "identity", aes(x = sampleName, y = Treg))+
   xlab("Bacterial Product") +
   ylab("CD4+Foxp3+IL10+ Fraction") +
-  theme(axis.text.x = element_text(hjust = 1, size =6, angle = 90), axis.text.y = element_text(size = 6))
+  theme(axis.text.x = element_text(hjust = 1, size =10, angle = 90), axis.text.y = element_text(size = 6))
+```
+
+```{r}
+#CD4+Foxp3+ fraction
+ggplot(meanValues)+
+  geom_bar(stat = "identity", aes(x = sampleName, y = CD4Foxp3, fill = factor(baby)))+
+  xlab("Bacterial Product") +
+  ylab("CD4+Foxp3+ Fraction") +
+  theme(axis.text.x = element_text(hjust = 1, size =6, angle = 90), axis.text.y = element_text(size = 6))+
+  scale_fill_discrete(name = "Baby")
+
+CD4Foxp3 = mean(CD4_Foxp3)
+
 ```
